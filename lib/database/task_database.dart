@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:pmsn2025/models/todo_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -20,8 +21,36 @@ class TaskDatabase {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = join(directory.path, NAMEDB);
     return openDatabase(path, version: VERSIONDB, onCreate: (db, version) {
-      String query = 'CREATE TABLE ...';
+      String query = '''CREATE TABLE todo (
+          idTodo integer primary key,
+          title_todo varchar(35),
+          desc_todo varchar(100),
+        date_todo varchar(10),
+        status_todo boolean
+      )''';
       db.execute(query);
     });
+  }
+
+  Future<int> INSERTAR(String table, Map<String, dynamic> map) async {
+    final con = await database;
+    return con!.insert(table, map);
+  }
+
+  Future<int> UPDATE(String table, Map<String, dynamic> map) async {
+    final con = await database;
+    return con!
+        .update(table, map, where: 'idTodo = ?', whereArgs: [map['idTodo']]);
+  }
+
+  Future<int> DELETE(String table, int idTodo) async {
+    final con = await database;
+    return con!.delete(table, where: 'idTodo = ?', whereArgs: [idTodo]);
+  }
+
+  Future<List<TodoModel>> SELECT() async {
+    final con = await database;
+    var result = await con!.query('todo');
+    return result.map((task) => TodoModel.fromMap(task)).toList();
   }
 }

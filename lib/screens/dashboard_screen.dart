@@ -46,6 +46,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
             title: Text('Practica Figma'),
             subtitle: Text('Frontend App'),
             trailing: Icon(Icons.chevron_right),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, 'todo');
+            },
+            leading: Icon(Icons.task),
+            title: Text('Todo App'),
+            subtitle: Text('Task List'),
+            trailing: Icon(Icons.chevron_right),
           )
         ]),
       ),
