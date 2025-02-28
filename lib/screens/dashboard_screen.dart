@@ -2,6 +2,7 @@ import 'package:dark_light_button/dark_light_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pmsn2025/utils/global_values.dart';
 import 'package:pmsn2025/utils/theme_settings.dart';
+import 'package:practica_figma/screens/home_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -32,16 +33,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ],
       ),
+      drawerEnableOpenDragGesture: false,
+      drawerEdgeDragWidth: 0,
       drawer: Drawer(
         child: ListView(children: [
           const UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
                   backgroundImage: NetworkImage(
-                      'https://www.revistaeyn.com/binrepository/1201x960/0c0/1200d900/none/26086/QFFG/ia-yatra_3165354_20221208131211.jpg')),
+                      'https://lh3.googleusercontent.com/a/ACg8ocK4jeHz5qptwBYF3OdBgSeLVJWtZkzivsVOOoSU63FCJGj3qDA=s288-c-no')),
               accountName: Text('Cristian Quintana Villicaña'),
               accountEmail: Text('crisitgaan@mail.com')),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/homeScreen', // Nueva pantalla
+                (route) => false, // Elimina todas las pantallas anteriores
+              );
+            },
             leading: Icon(Icons.design_services),
             title: Text('Practica Figma'),
             subtitle: Text('Frontend App'),
@@ -55,9 +64,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
             title: Text('Todo App'),
             subtitle: Text('Task List'),
             trailing: Icon(Icons.chevron_right),
-          )
+          ),
         ]),
       ),
+
       // endDrawer: Drawer(),
       body: Center(
         child: Text('Dashboard'),

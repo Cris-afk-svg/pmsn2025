@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ThemeSettings {
   static ThemeData ligthTheme() {
     final theme = ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme(
             brightness: Brightness.light,
             primary: Colors.red,
